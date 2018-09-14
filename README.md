@@ -1,3 +1,6 @@
+# OrderWater
+React Order and Order-Taking Platform
+
 3 Pieces:
 
 1. Client - Consumer that Orders
@@ -20,3 +23,4 @@ Todo:
 
 
 Clients were bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
