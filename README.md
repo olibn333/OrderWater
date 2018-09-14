@@ -8,15 +8,19 @@ React Order and Order-Taking Platform
 3. Server - API that calls to sqlite server
 
 Usage:
-git clone to get all three
-npm install in each folder to get dependencies
-npm start on top level to start them all
+- clone this repo
+Install npm packages for each folder:
+- 'cd client', 'npm install'
+- 'cd ..', 'cd client2', 'npm install'
+- 'cd ..', 'npm install'
+Run!
+- npm start on top level to start all Pieces
 
 Todo:
-- merge clients 1&2
-- user management
-- points usage, rewards
+- merge clients 1&2 into 1 app
+- user management, points usage, rewards
 - santitise sql
+- server sent events for auto update
 - make the cat wink
 - o so much more
 
