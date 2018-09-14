@@ -1,5 +1,5 @@
 # OrderWater
-React Order and Order-Taking Platform
+React Ordering and Order-Taking Platform
 
 3 Pieces:
 
@@ -8,12 +8,12 @@ React Order and Order-Taking Platform
 3. Server - API that calls to sqlite server
 
 Usage:
-- clone this repo
-Install npm packages for each folder:
+- clone this repo  
+Install npm packages for each folder:  
 - 'cd client', 'npm install'
 - 'cd ..', 'cd client2', 'npm install'
-- 'cd ..', 'npm install'
-Run!
+- 'cd ..', 'npm install'  
+Run!  
 - npm start on top level to start all Pieces
 
 Todo:
