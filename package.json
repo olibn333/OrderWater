@@ -4,13 +4,14 @@
   "private": true,
   "dependencies": {
     "babel-core": "6.14.0",
-    "express": "4.13.3",
+    "express": "^4.16.3",
     "fs": "0.0.2",
-    "sqlite": "3.0.0"
+    "sqlite": "3.0.0",
+    "sqlite3": "^4.0.2"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\" \"npm run client2\"",
-    "server": "node server.js",
+    "server": "node start-server.js",
     "client": "node start-client.js",
     "client2": "node start-client2.js",
     "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",

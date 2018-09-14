@@ -6,8 +6,8 @@ const sqlite3 = require('sqlite3').verbose();
 var path = require('path');
 var appDir = path.dirname(require.main.filename);
 
-const dbName = 'orders2.db'
-const dbPath = appDir + '/db/' + dbName
+const dbName = 'orders.db'
+const dbPath = appDir + '/server/' + dbName
 const t1Name = 'waterOrders'
 const crPass = 'auth123' //pass to create table or check all
 
@@ -31,15 +31,30 @@ const create1 = `
     order1l INTEGER)`
 
 //Connect
-let db = new sqlite3.Database(dbPath, (err) => {
-    if (err) {
-        return console.error(err.message);
-    }
-    console.log('Connected to ' + dbName + '.');
-});
+function openNewDB() {
+var db = new sqlite3.Database(dbPath, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Connected to ' + dbName + '.');
+    })
+    return db
+}
 
-//Functions
+//Disconnect
+function closeDB(db) {
+    db.close((err) => {
+        if (err) {
+          console.error(err.message);
+        }
+        console.log('Closed the database connection.');
+      });
+}
+
+//Calls
 function woCreateDB(pass, cb) {
+
+    var db = openNewDB()
 
     if (pass == crPass) {
 
@@ -56,9 +71,11 @@ function woCreateDB(pass, cb) {
     else {
         return cb('Error. Unauthorised.')
     }
+    closeDB(db)
 };
 
 function woInsert(data, cb) {
+    var db = openNewDB()
     const successMsg = 'Data ' + data + ' inserted.'
     if (typeof data !== 'undefined' && data.split(",").length == 2) {
         var params = data.split(",");
@@ -76,11 +93,14 @@ function woInsert(data, cb) {
     else {
         return cb('Error. Please provide exactly 2 arguments - Name and Number.')
     }
+    closeDB(db)
 };
 
 
 function woPrint(pass, cb) {
     if (pass == crPass) {
+
+        var db = openNewDB()
 
         var list = []
         db.all(check1, function (err, rows) {
@@ -96,6 +116,7 @@ function woPrint(pass, cb) {
     else {
         return cb('Error. Unauthorised.')
     }
+    closeDB(db)
 };
 
 /* function woPrint() {
