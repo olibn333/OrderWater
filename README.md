@@ -13,12 +13,12 @@ npm install in each folder to get dependencies
 npm start on top level to start them all
 
 Todo:
--merge clients 1&2
--user management
--points usage, rewards
--santitise sql
--make the cat wink
--o so much more
+- merge clients 1&2
+- user management
+- points usage, rewards
+- santitise sql
+- make the cat wink
+- o so much more
 
 
 
