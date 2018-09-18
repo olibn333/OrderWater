@@ -1,3 +1,8 @@
+*{
+  font-family: 'Indie Flower', cursive;
+  text-align: center;
+}
+
 .App {
   text-align: center;
   font-size: 10px;
@@ -37,16 +42,16 @@
   right: 1rem;
   top: 1rem;
   width: 5rem;
-  height: 5rem;
+  height: 10rem;
   font-size: 0.8rem;
   border: 1px solid green;
 }
 
 /* Elements Stuff */
 
-.button, .form {
+.button, .form, .label {
   font-size: 1rem;
-  margin: 0.5rem auto;
+  margin: 1rem auto;
   margin-bottom: 1rem;
   display: block;
 }
@@ -65,6 +70,24 @@
   box-shadow: 0 9px #999;
 }
 
+.logout {
+  float: left;
+  position: absolute;
+}
+
+input {
+  display: initial;
+  position: relative;
+  margin: 0.2rem;
+}
+
+.side {
+  border: 0;
+  margin: 0 0;
+  display: inline;
+  padding: 10px 20px
+}
+
 .button:hover {background-color: #3e8e41}
 
 .button:active {
@@ -76,7 +99,7 @@
 /* Form Stuff */
 
 .form {
-  width: 15rem;
+  width: 25rem;
 }
 
 @keyframes App-logo-spin {

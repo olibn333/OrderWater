@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from './Header'
 
-class App extends Component {
+
+class BizApp extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       dbData: [],
       isLoading: true,
-      myOrders: []
+      myOrders: [],
+      err: ''
     };
   }
 
@@ -20,16 +23,16 @@ class App extends Component {
     fetch('/api/call?q=' + q)
       .then(response => {
         if (response.ok) {
-          //var res1 = response.json()
-          //console.log(res1)
           return response.json()
         } else {
-          console.log('Bad response from server - ' + response.statusText)
-          return []
+          throw new Error(response.statusText)
         }
       })
       .then(response2 => {
         this.setState({ dbData: response2[0], isLoading: false })
+      })
+      .catch(error => {
+        this.setState({ err: error })
       })
   }
 
@@ -44,12 +47,18 @@ class App extends Component {
     //console.log(this.state.data.map(x => x));
     //this.state.data.forEach(x => console.log(x))
     console.log('App Rendered')
-    console.log('DL Data ' + this.state.dbData.length)
 
     var form
     if (this.state.isLoading) {
-      form = <p>Loading...</p>
+      var err = this.state.err
+      form = 
+      <div>
+        <p>Loading...</p>
+        {err.message}
+      </div>
     } else {
+      //console.log('DL Data ...' + this.state.dbData.length)
+
       form =
         <TableForm
           save={this.saveOrders}
@@ -61,14 +70,16 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
+            <Header />
+
+{/*         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <CounterMark
             myOrders={this.state.myOrders}
           />
           <h1 className="App-title">Welcome to YaYCat Orders!</h1>
         </header>
-        <p className="App-intro">
+ */}        <p className="App-intro">
           To get started, select some Orders below!
     </p>
         {form}
@@ -191,4 +202,4 @@ class CounterMark extends Component {
   }
 }
 
-export default App;
+export default BizApp;

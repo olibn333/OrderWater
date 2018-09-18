@@ -10,13 +10,13 @@ React Ordering and Order-Taking Platform
 Usage:
 - clone this repo
  <br /> <br />
-Install npm packages for each folder:
+Install npm packages for client, client2 and root folders:
+- 'npm install'
+- 'cd client2', 'npm install'
 - 'cd client', 'npm install'
-- 'cd ..', 'cd client2', 'npm install'
-- 'cd ..', 'npm install'
  <br /> <br />
 Run!
-- npm start on top level to start all Pieces
+- 'npm start' on top level to start all Pieces. You should get 2 open browser pages pointing at localhost, both talking to the server.
 
 Todo:
 - merge clients 1&2 into 1 app

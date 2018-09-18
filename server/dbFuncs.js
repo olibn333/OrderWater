@@ -17,8 +17,9 @@ const check1 = 'select *, DATETIME(timestamp, "localtime") as dt1 from ' + t1Nam
 const insert1 = `
     INSERT INTO ` + t1Name + ` (
         name,
-        phone)
-    VALUES (?,?)
+        phone,
+        order5l)
+    VALUES (?,?,?)
     `
 
 const create1 = `
@@ -77,7 +78,7 @@ function woCreateDB(pass, cb) {
 function woInsert(data, cb) {
     var db = openNewDB()
     const successMsg = 'Data ' + data + ' inserted.'
-    if (typeof data !== 'undefined' && data.split(",").length == 2) {
+    if (typeof data !== 'undefined' && data.split(",").length == 3) {
         var params = data.split(",");
         (
             db.run(insert1, params, function (err) {
@@ -91,7 +92,7 @@ function woInsert(data, cb) {
         )
     }
     else {
-        return cb('Error. Please provide exactly 2 arguments - Name and Number.')
+        return cb('Error. Please provide exactly 3 arguments - Name, Number and Order.')
     }
     closeDB(db)
 };
