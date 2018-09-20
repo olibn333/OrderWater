@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header'
-import PointsBox from './PointsBox'
+import Loader from './Loader'
+
 
 class ConsApp extends Component {
 
@@ -138,8 +139,8 @@ class ConsApp extends Component {
 
     return (
       <div className="App">
-          <Header isHome={false}/>
-          <div className="Inputs">
+        <Header isHome={false} />
+        <div className="Inputs">
           <UserForm
             updateUser={this.updateUser}
             nameOnChange={this.nameOnChange}
@@ -161,14 +162,18 @@ class UserForm extends Component {
     super(props);
     this.state = {
       fiveL: 1,
-      oneL: 0
+      oneL: 0,
+      isLoading: false
     }
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.updateUser(this.state.fiveL)
-  };
+    this.setState({isLoading:true})
+  }
+
+  reset = () => {this.setState({isLoading:false})}
 
   fiveLOrderOnChange = (event) => {
     this.setState({ fiveL: event.target.value })
@@ -176,16 +181,23 @@ class UserForm extends Component {
 
   increaseClick = () => {
     var new1 = this.state.fiveL + 1
-    this.setState({ fiveL : new1 })
+    this.setState({ fiveL: new1 })
   }
 
   decreaseClick = () => {
     var new1 = this.state.fiveL - 1
-    this.setState({ fiveL : new1 })
+    this.setState({ fiveL: new1 })
   }
 
   render() {
     console.log('rendered form')
+
+    if (this.state.isLoading) {
+      var doneSubmit = <Loader reset={this.reset}/>
+    } else {
+      var doneSubmit = <input type="submit" className="button" value="Submit" />
+    }
+
     return (
       <form className="form" onSubmit={this.handleSubmit}>
         <div className="label">
@@ -206,11 +218,12 @@ class UserForm extends Component {
             placeholder="Enter Phone Number Here"
           />
         </div>
-        
+
         <div className="label">
           How many 5L bottles? <br></br>
 
           <button
+            type="button"
             onClick={this.decreaseClick}
             className="button side"
           >-</button>
@@ -223,13 +236,14 @@ class UserForm extends Component {
           />
 
           <button
+            type="button"
             onClick={this.increaseClick}
             className="button side"
           >+</button>
 
         </div>
+        {doneSubmit}
 
-        <input type="submit" className="button" value="Submit" />
       </form>
 
     )

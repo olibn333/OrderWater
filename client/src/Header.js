@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import logo from './logo.svg';
+import logo from './icons/logo.svg';
 import './App.css';
 
 class Header extends Component {
@@ -14,7 +14,6 @@ class Header extends Component {
   logOut = () => {
     this.setState({goHome :true})
   }
-
 
   render() {
 

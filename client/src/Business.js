@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './Header'
 
@@ -25,7 +24,7 @@ class BizApp extends Component {
         if (response.ok) {
           return response.json()
         } else {
-          throw new Error(response.statusText)
+          throw new Error(response.status + " " + response.statusText)
         }
       })
       .then(response2 => {
@@ -54,7 +53,7 @@ class BizApp extends Component {
       form = 
       <div>
         <p>Loading...</p>
-        {err.message}
+        <p className="error">{err.message}</p>
       </div>
     } else {
       //console.log('DL Data ...' + this.state.dbData.length)
