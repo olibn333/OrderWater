@@ -2,8 +2,8 @@
 const sqlite3 = require('sqlite3').verbose();
 
 //DB Dirs
-let path = require('path');
-let appDir = path.dirname(require.main.filename);
+var path = require('path');
+var appDir = path.dirname(require.main.filename);
 
 const dbName = 'orders.db'
 const dbPath = appDir + '/server/' + dbName
@@ -43,7 +43,7 @@ const create1 = `
     committedUser TEXT)`
 
 const remove1 = (dataQs) => `
-    DELETE FROM ` + t1Name + ` WHERE id IN ` + dataQs
+    DEvarE FROM ` + t1Name + ` WHERE id IN ` + dataQs
 
 
 const update1 = (uName, dataQs) => `
@@ -52,7 +52,7 @@ const update1 = (uName, dataQs) => `
 
 //Connect
 function openNewDB() {
-  let db = new sqlite3.Database(dbPath, (err) => {
+  var db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
       return console.error(err.message);
     }
@@ -77,8 +77,8 @@ function closeDB(db) {
 
 //Commit to Order
 function woCommit(data, cb) {
-  let db = openNewDB()
-  let params = data.split(",");
+  var db = openNewDB()
+  var params = data.split(",");
   const dQs = "(" + params.map((x) => '?').join(',') + ")";
   const browserUName = params[0]
   const update2 = update1(browserUName, dQs)
@@ -105,17 +105,17 @@ function woCommit(data, cb) {
 
 //Remove records
 function woRemove(data, cb) {
-  let db = openNewDB()
-  const successMsg = 'Data ' + data + ' deleted.'
+  var db = openNewDB()
+  const successMsg = 'Data ' + data + ' devared.'
   if (typeof data !== 'undefined' && data.split(",").length > 0) {
-    let params = data.split(",");
+    var params = data.split(",");
     (
       db.run(remove1, params, function (err) {
         if (err) {
           cb(err.message);
           return console.error(err.message);
         }
-        console.log(`Rows deleted ${this.changes}`);
+        console.log(`Rows devared ${this.changes}`);
         return cb(successMsg);
       })
     )
@@ -129,7 +129,7 @@ function woRemove(data, cb) {
 //Create New DB
 function woCreateDB(pass, cb) {
 
-  let db = openNewDB()
+  var db = openNewDB()
 
   if (pass == crPass) {
 
@@ -151,10 +151,10 @@ function woCreateDB(pass, cb) {
 
 //Insert new Record
 function woInsert(data, cb) {
-  let db = openNewDB()
+  var db = openNewDB()
   const successMsg = 'Data ' + data + ' inserted.'
   if (typeof data !== 'undefined' && data.split(",").length == 3) {
-    let params = data.split(",");
+    var params = data.split(",");
     (
       db.run(insert1, params, function (err) {
         if (err) {
@@ -176,9 +176,9 @@ function woInsert(data, cb) {
 function woPrint(pass, cb) {
   if (pass == crPass) {
 
-    let db = openNewDB()
+    var db = openNewDB()
 
-    let list = []
+    var list = []
     db.all(read1, function (err, rows) {
       if (err) {
         // call your callback with the error
