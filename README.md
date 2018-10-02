@@ -1,6 +1,8 @@
 # OrderWater
 React Ordering and Order-Taking Platform
 
+![Image of YayCat](https://github.com/olibn333/OrderWater/blob/master/client/src/icons/logo.svg)
+
 2 Pieces:
 
 1. Client - Consumer that Orders and Business that receives Orders 
