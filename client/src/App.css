@@ -72,10 +72,18 @@ html {
 @media only screen and (max-width:600px) {
   .points {
     font-size: 0.5rem;
-    width: 8rem;
+    width: 5rem;
   }
   .header {
     font-size: 0.6rem;
+  }
+  .shrinkable {
+    width: 10rem;
+  }
+  .logout {
+    padding: 5px 10px !important;
+    margin: 0 !important;
+    font-size: 5px;
   }
 }
 

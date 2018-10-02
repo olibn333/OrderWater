@@ -205,6 +205,7 @@ class UserForm extends Component {
           <input
             onChange={this.props.nameOnChange}
             value={this.props.userName}
+            className="shrinkable"
             placeholder="Enter Name Here"
           />
         </div>
@@ -214,6 +215,7 @@ class UserForm extends Component {
           <input
             onChange={this.props.numberOnChange}
             value={this.props.userPhoneNumber}
+            className="shrinkable"
             placeholder="Enter Phone Number Here"
           />
         </div>
@@ -231,7 +233,7 @@ class UserForm extends Component {
             onChange={this.fiveLOrderOnChange}
             type="number"
             value={this.state.fiveL}
-            className="num"
+            className="shrinkable"
           />
 
           <button

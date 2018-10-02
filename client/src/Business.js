@@ -19,8 +19,9 @@ class BizApp extends Component {
   }
 
   componentDidMount() {
-    this.dbGetOrders();
-    this.checkUser();
+    this.dbGetOrders(); //sqlite db connection
+    //this.dbGetTestOrders(); // TODO - localstorage connection for testing
+    this.checkUser(); 
   }
 
   //DB Connect
@@ -255,19 +256,5 @@ class TableRow extends React.PureComponent {
   }
 }
 
-class CounterMark extends Component {
-
-  render() {
-    console.log('Counter Rendered')
-    return (
-      <div className="points" onChange={this.props.updateUser}>
-        User: {this.props.user} <br></br><br></br>
-        YayPoints: {this.props.counter} <br></br>
-        Gold Coins: {this.props.coins}
-        My Orders: {this.props.myOrders.length}
-      </div>
-    )
-  }
-}
 
 export default BizApp;

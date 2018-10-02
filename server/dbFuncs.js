@@ -43,7 +43,7 @@ const create1 = `
     committedUser TEXT)`
 
 const remove1 = (dataQs) => `
-    DEvarE FROM ` + t1Name + ` WHERE id IN ` + dataQs
+    DELETE FROM ` + t1Name + ` WHERE id IN ` + dataQs
 
 
 const update1 = (uName, dataQs) => `
@@ -106,7 +106,7 @@ function woCommit(data, cb) {
 //Remove records
 function woRemove(data, cb) {
   var db = openNewDB()
-  const successMsg = 'Data ' + data + ' devared.'
+  const successMsg = 'Data ' + data + ' deleted.'
   if (typeof data !== 'undefined' && data.split(",").length > 0) {
     var params = data.split(",");
     (
@@ -115,7 +115,7 @@ function woRemove(data, cb) {
           cb(err.message);
           return console.error(err.message);
         }
-        console.log(`Rows devared ${this.changes}`);
+        console.log(`Rows deleted ${this.changes}`);
         return cb(successMsg);
       })
     )
