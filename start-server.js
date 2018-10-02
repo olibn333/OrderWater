@@ -34,6 +34,15 @@ app.get("/api/call", (req, res) => {
   })
 });
 
+app.get("/api/commit", (req, res) => {
+  const param = req.query.q;
+
+  dbFuncs.woCommit(param, function (msg) {
+    res.json(msg)
+  })
+});
+
+
 
 app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`);

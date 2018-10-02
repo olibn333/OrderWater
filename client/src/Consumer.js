@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header'
 import Loader from './Loader'
+import Userbox from './UserBox'
 
 
 class ConsApp extends Component {
@@ -9,12 +10,7 @@ class ConsApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      yayPoints: 0,
       goldCoins: 0,
-      spentPoints: 0,
-      spentCoins: 0,
-      pointToCoin: 0,
-      pointToCoinLevel: 10,
       userPhoneNumber: "",
       userName: "",
       userAddress: "",
@@ -140,6 +136,9 @@ class ConsApp extends Component {
     return (
       <div className="App">
         <Header isHome={false} />
+        <Userbox 
+          user={this.state.userName}/>
+
         <div className="Inputs">
           <UserForm
             updateUser={this.updateUser}
@@ -170,10 +169,10 @@ class UserForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.updateUser(this.state.fiveL)
-    this.setState({isLoading:true})
+    this.setState({ isLoading: true })
   }
 
-  reset = () => {this.setState({isLoading:false})}
+  reset = () => { this.setState({ isLoading: false }) }
 
   fiveLOrderOnChange = (event) => {
     this.setState({ fiveL: event.target.value })
@@ -191,11 +190,11 @@ class UserForm extends Component {
 
   render() {
     console.log('rendered form')
-
+    var doneSubmit
     if (this.state.isLoading) {
-      var doneSubmit = <Loader reset={this.reset}/>
+      doneSubmit = <Loader reset={this.reset} />
     } else {
-      var doneSubmit = <input type="submit" className="button" value="Submit" />
+      doneSubmit = <input type="submit" className="button" value="Submit" />
     }
 
     return (

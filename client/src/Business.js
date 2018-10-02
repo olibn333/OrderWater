@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './Header'
+import Header from './Header';
+import * as Fingerprint2 from 'fingerprintjs2';
+import Loader from './Loader'
 
 
 class BizApp extends Component {
@@ -10,15 +12,21 @@ class BizApp extends Component {
     this.state = {
       dbData: [],
       isLoading: true,
+      userHash: [''],
       myOrders: [],
       err: ''
     };
   }
 
+  componentDidMount() {
+    this.dbGetOrders();
+    this.checkUser();
+  }
+
   //DB Connect
 
-  componentDidMount() {
-    var q = 'auth123'
+  dbGetOrders = () => {
+    const q = 'auth123'
     fetch('/api/call?q=' + q)
       .then(response => {
         if (response.ok) {
@@ -28,57 +36,69 @@ class BizApp extends Component {
         }
       })
       .then(response2 => {
-        this.setState({ dbData: response2[0], isLoading: false })
+        console.log(response2)
+        if (response2[0].length > 0) {
+          this.setState({ dbData: response2[0], isLoading: false })
+        } else {
+          throw new Error("No More Orders!")
+        }
       })
       .catch(error => {
         this.setState({ err: error })
+        console.log(error)
       })
   }
 
-  saveOrders = (orderId) => {
-    var newState = this.state.myOrders.concat(orderId)
-    this.setState({ myOrders: newState })
+  dbCommitOrders = (query) => {
+    fetch(`/api/commit?q=${query}`, {
+      accept: "application/json"
+    });
   }
 
+  //User
+  checkUser = () => {
+    new Fingerprint2().get((result, components) => {
+      console.log(result) // a hash, representing your device fingerprint
+      //console.log(components) // an array of FP components
+      this.setState({ userHash: [result] })
+    })
+  }
 
+  saveOrders = (orderIds) => {
+    const newState = this.state.myOrders.concat(orderIds)
+    this.setState({ myOrders: newState }, () => {
+      const uHashAndData = this.state.userHash.concat(orderIds)
+      console.log(uHashAndData)
+      this.dbCommitOrders(uHashAndData)
+    }
+    )
+  }
 
   render() {
-    //console.log(this.state.data.map(x => x));
-    //this.state.data.forEach(x => console.log(x))
     console.log('App Rendered')
 
-    var form
+    let form
     if (this.state.isLoading) {
-      var err = this.state.err
-      form = 
-      <div>
-        <p>Loading...</p>
-        <p className="error">{err.message}</p>
-      </div>
+      const err = this.state.err
+      form =
+        <div>
+          <p>Loading...</p>
+          <p className="error">{err.message}</p>
+        </div>
     } else {
-      //console.log('DL Data ...' + this.state.dbData.length)
 
       form =
         <TableForm
           save={this.saveOrders}
           data={this.state.dbData}
-        //removeRows={this.removeRows}
-        //handleSubmit={this.handleSubmit}
         />
     }
 
     return (
       <div className="App">
-            <Header />
+        <Header />
 
-{/*         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <CounterMark
-            myOrders={this.state.myOrders}
-          />
-          <h1 className="App-title">Welcome to YaYCat Orders!</h1>
-        </header>
- */}        <p className="App-intro">
+        <p className="App-intro">
           To get started, select some Orders below!
     </p>
         {form}
@@ -91,8 +111,10 @@ class TableForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      commits: [],
-      renderRows: []
+      committedRows: [],
+      renderRows: [],
+      isLoading: false,
+      selectedAll: false
     };
   }
 
@@ -100,29 +122,72 @@ class TableForm extends Component {
     this.setState({ renderRows: this.props.data })
   }
 
+  //Submission
+  handleSubmit = (event) => {
+    event.preventDefault()
+    this.props.save(this.state.committedRows)
+    this.removeRows(this.state.committedRows)
+    this.setState({ isLoading: true })
+    if (this.state.selectedAll === true) { this.setState({ selectedAll: false }) }
+  }
+
   removeRows = (remRows) => {
-    console.log(remRows)
     this.setState((prevState) => ({
       renderRows: prevState.renderRows.filter((row) => remRows.includes(row.id) ? '' : row)
     }))
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.save(this.state.commits)
-    this.removeRows(this.state.commits)
+  resetLoading = () => { this.setState({ isLoading: false }) }
+
+  //Select One
+  selectCommit = (rowid) => {
+    if (this.state.committedRows.includes(rowid)) { this.removeCommit(rowid) } else { this.addCommit(rowid) }
   }
 
   addCommit = (rowid) => {
-    //var newState = this.state.commits.concat(rowid)
-    this.setState((prevState) => ({ commits: prevState.commits.concat(rowid) }))
+    const newState = this.state.committedRows.concat(rowid)
+    this.setState({
+      committedRows: newState
+    })
+  }
+
+  removeCommit = (rowid) => {
+    const newState = this.state.committedRows.filter(id => !(id === rowid))
+    this.setState({
+      committedRows: newState
+    })
+  }
+
+  //Select All
+  selectAllClick = () => {
+    if (this.state.selectedAll === true) {
+      this.deselectAll()
+    } else {
+      this.selectAll()
+    }
+    this.setState({ selectedAll: !this.state.selectedAll })
+  }
+
+  selectAll = () => {
+    const idArray = this.state.renderRows.map((x) => x.id)
+    console.log(idArray)
+    this.setState({
+      committedRows: idArray
+    })
+  }
+
+  deselectAll = () => {
+    this.setState({
+      committedRows: []
+    })
+
   }
 
   render() {
     console.log('Table Rendered')
 
-    var headData = this.props.data[0]
-    var heads
+    let headData = this.props.data[0]
+    let heads
 
     if (headData === undefined) {
       heads = <tbody><tr><td>'Loading...'</td></tr></tbody>
@@ -131,54 +196,58 @@ class TableForm extends Component {
       heads =
         <thead>
           <tr>
-            <th></th>
-            {Object.keys(headData).map((x, i) => <th key={i}>{x}</th>)}
+            <th><input onClick={this.selectAllClick} type='checkbox'></input></th>
+            {Object.keys(headData).map((x) => <th key={x.name}>{x}</th>)}
           </tr>
         </thead>
+      console.log("head rendered")
     }
+
+    let submitButton
+    if (this.state.isLoading) {
+      submitButton = <Loader reset={this.resetLoading} />
+    } else {
+      submitButton = <button className='button'>Commit to These Orders</button>
+    }
+
 
     return (
 
       <form onSubmit={this.handleSubmit}>
-        <button className='button'>Commit to These Orders</button>
         <table>
           {heads}
           <tbody>
             {this.state.renderRows.map((x) =>
               <TableRow
-                key={Object.values(x)[0]}
+                key={Object.values(x)[0].toString()}
                 cells={x}
-                save={this.addCommit}
+                save={this.selectCommit}
+                selected={this.state.committedRows.includes(Object.values(x)[0]) ? true : false}
               />
             )}
           </tbody>
         </table>
+        {submitButton}
       </form>
     )
   }
 }
 
 
-class TableRow extends Component {
+class TableRow extends React.PureComponent {
   constructor(props) {
-    super(props);
-    this.state = {
-      selected: false
-    }
+    super(props)
   }
 
-  handleChange = () => {
-    this.setState({ selected: !this.state.selected })
-    this.props.save(Object.values(this.props.cells)[0])
-  }
+  handleChange = () => this.props.save(Object.values(this.props.cells)[0]);
 
   render() {
     console.log('Row Rendered')
     return (
-      <tr onClick={this.handleChange} className={this.state.selected ? 'selected' : 'unselected'}>
-        <td key='0'><input onClick={this.handleChange} type='checkbox' checked={this.state.selected}></input></td>
-        {Object.values(this.props.cells).map((y, i) =>
-          <td key={i + 1}>
+      <tr onClick={this.handleChange} className={this.props.selected ? 'selected' : 'unselected'}>
+        <td><input onClick={this.handleChange} type='checkbox' checked={this.props.selected}></input></td>
+        {Object.values(this.props.cells).map((y) =>
+          <td key={"cell" + y}>
             {y}
           </td>
         )}
