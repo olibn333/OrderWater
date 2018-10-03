@@ -2,8 +2,8 @@
   "name": "orderwater-consumer",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
-  "homepage": ".",
+  //"proxy": "http://localhost:3001/",
+  "homepage": "https://olibn333.github.io/OrderWater/",
   "dependencies": {
     "normalize.css": "^8.0.0",
     "react": "^16.4.2",
