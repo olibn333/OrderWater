@@ -6,7 +6,7 @@ var path = require('path');
 var appDir = path.dirname(require.main.filename);
 
 const dbName = 'orders.db'
-const dbPath = appDir + '\\' + dbName
+const dbPath = appDir + '//' + dbName
 const t1Name = 'waterOrders'
 const crPass = 'auth123' //pass to create table or check all
 
