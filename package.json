@@ -4,7 +4,7 @@
   "description": "OrderWater server only",
   "main": "server/start-server.js",
   "scripts": {
-    "start": "node server/start-server.js",
+    "start": "node ./server/start-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
