@@ -1,5 +1,5 @@
 const express = require("express");
-const dbFuncs = require("./server/dbFuncs.js")
+const dbFuncs = require("./dbFuncs.js")
 
 const app = express();
 

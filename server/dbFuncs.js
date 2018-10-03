@@ -6,10 +6,11 @@ var path = require('path');
 var appDir = path.dirname(require.main.filename);
 
 const dbName = 'orders.db'
-const dbPath = appDir + '/server/' + dbName
+const dbPath = appDir + '\\' + dbName
 const t1Name = 'waterOrders'
 const crPass = 'auth123' //pass to create table or check all
 
+console.log(dbPath)
 //SQL Strings
 
 const checkAll1 = `SELECT * from ` + t1Name
@@ -178,15 +179,17 @@ function woPrint(pass, cb) {
 
     var db = openNewDB()
 
-    var list = []
+    //var list = []
     db.all(read1, function (err, rows) {
       if (err) {
         // call your callback with the error
         cb(err);
       }
+      else {
       // call your callback with the data
-      list.push(rows);
+      const list = [rows]
       cb(list);
+      }
     });
   }
   else {

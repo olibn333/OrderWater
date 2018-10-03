@@ -211,7 +211,6 @@ class TableForm extends Component {
       submitButton = <button className='button'>Commit to These Orders</button>
     }
 
-
     return (
 
       <form onSubmit={this.handleSubmit}>

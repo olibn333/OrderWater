@@ -18,10 +18,15 @@ class ConsApp extends Component {
   }
 
   //DB Connect
-  query1 = (query) => {
+  placeOrderDB = (query) => {
     return fetch(`/api/order?q=${query}`, {
       accept: "application/json"
     });
+  }
+
+  //LocalStorage Connect
+  placeOrderLS = (query) => {
+    localStorage.setItem 
   }
 
   //Persistence
@@ -91,7 +96,7 @@ class ConsApp extends Component {
   updateUser = (order) => {
     this.addPoints(3);
     this.calcCoins();
-    this.query1(this.state.userName + ',' + this.state.userPhoneNumber + ',' + order);
+    this.placeOrderDB(this.state.userName + ',' + this.state.userPhoneNumber + ',' + order);
   }
 
   //Points Handling
