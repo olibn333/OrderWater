@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <div>
             <Route path exact="/" component={Home} />
             <Route path="/business" component={BizApp} />

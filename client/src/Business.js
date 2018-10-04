@@ -4,6 +4,7 @@ import Header from './Header';
 import * as Fingerprint2 from 'fingerprintjs2';
 import Loader from './Loader'
 
+var serverAddress = "https://orderwater-api.herokuapp.com"
 
 class BizApp extends Component {
 
@@ -28,7 +29,7 @@ class BizApp extends Component {
 
   dbGetOrders = () => {
     const q = 'auth123'
-    fetch('/api/call?q=' + q)
+    fetch(serverAddress + '/api/call?q=' + q)
       .then(response => {
         if (response.ok) {
           return response.json()
@@ -51,7 +52,7 @@ class BizApp extends Component {
   }
 
   dbCommitOrders = (query) => {
-    fetch(`/api/commit?q=${query}`, {
+    fetch(serverAddress + `/api/commit?q=${query}`, {
       accept: "application/json"
     });
   }

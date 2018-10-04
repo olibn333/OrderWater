@@ -4,6 +4,7 @@ import Header from './Header'
 import Loader from './Loader'
 import Userbox from './UserBox'
 
+var serverAddress = "https://orderwater-api.herokuapp.com"
 
 class ConsApp extends Component {
 
@@ -20,7 +21,7 @@ class ConsApp extends Component {
 
   //DB Connect
   placeOrderDB = (query) => {
-    return fetch(`/api/order?q=${query}`, {
+    return fetch(serverAddress + `/api/order?q=${query}`, {
       accept: "application/json"
     });
   }
