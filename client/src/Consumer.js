@@ -10,10 +10,11 @@ class ConsApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      goldCoins: 0,
-      userPhoneNumber: "",
-      userName: "",
-      userAddress: "",
+        userPhoneNumber: "",
+        userName: "",
+        userAddress: "",
+        userOrdersCount: 0,
+        userBottlesCount: 0,
     };
   }
 
@@ -22,11 +23,6 @@ class ConsApp extends Component {
     return fetch(`/api/order?q=${query}`, {
       accept: "application/json"
     });
-  }
-
-  //LocalStorage Connect
-  placeOrderLS = (query) => {
-    localStorage.setItem 
   }
 
   //Persistence
@@ -94,17 +90,17 @@ class ConsApp extends Component {
   }
 
   updateUser = (order) => {
-    this.addPoints(3);
-    this.calcCoins();
+    this.addBottlesCount(order);
+    this.addOrderCount(1);
     this.placeOrderDB(this.state.userName + ',' + this.state.userPhoneNumber + ',' + order);
   }
 
   //Points Handling
 
-  addPoints = (i) => {
+  addBottlesCount = (i) => {
+    const newBottlesCount = this.state.userBottlesCount + i
     this.setState({
-      yayPoints: this.state.yayPoints + i,
-      pointToCoin: this.state.pointToCoin + i
+      userBottlesCount : newBottlesCount
     });
   }
 
@@ -114,16 +110,10 @@ class ConsApp extends Component {
     });
   }
 
-
-  calcCoins = () => {
-    this.setState((prevState) => {
-      const newCoins = Math.floor(prevState.pointToCoin / prevState.pointToCoinLevel)
-      return {
-        goldCoins: prevState.goldCoins + newCoins,
-        pointToCoin: prevState.pointToCoin % prevState.pointToCoinLevel
-      };
+  addOrderCount = (i) => {
+    this.setState({
+      userOrdersCount: this.state.userOrdersCount + i,
     });
-
   }
 
   saveStateToLocalStorage = () => {
@@ -141,8 +131,10 @@ class ConsApp extends Component {
     return (
       <div className="App">
         <Header isHome={false} />
-        <Userbox 
-          user={this.state.userName}/>
+        <Userbox
+          user={this.state.userName}
+          ordersCount={this.state.userOrdersCount}
+          bottlesCount={this.state.userBottlesCount}/>
 
         <div className="Inputs">
           <UserForm

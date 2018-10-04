@@ -1,0 +1,7 @@
+<svg width="95mm" height="117mm" version="1.1" viewBox="0 0 95 117" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(-63.3 -49)">
+  <ellipse cx="115" cy="108" rx="43.3" ry="58.5" fill="#540" stroke-width=".265"/>
+  <ellipse cx="107" cy="108" rx="43.3" ry="58.5" fill="#fc0" stroke-width=".265"/>
+  <text x="103.12138" y="111.36614" fill="#000000" font-family="sans-serif" font-size="10.6px" letter-spacing="0px" stroke-width=".265px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="103.12138" y="111.36614" stroke-width=".265px">1</tspan></text>
+ </g>
+</svg>
