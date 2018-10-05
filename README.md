@@ -2,7 +2,7 @@
 React Ordering and Order-Taking Platform
 
 Demo Here:
-https://olibn333.github.io/OW-client/
+https://olibn333.github.io/OrderWater/
 
 <img src="https://github.com/olibn333/OrderWater/blob/master/client/src/icons/logo.svg" width="200"/>
 
