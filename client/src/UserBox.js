@@ -61,7 +61,7 @@ const CoinPics = ({ onClick, count }) => {
     <div
       className="coinsContainer"
       onClick={() => onClick(count)}>
-      {coinsArray.map((coinType, i) => <CoinPic key={i} value={coinType} />)}
+      {coinsArray.map((coinType, i) => <CoinPic key={coinType+i} value={coinType} />)}
     </div>)
 }
 

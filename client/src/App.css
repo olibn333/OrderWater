@@ -79,7 +79,7 @@ html {
   position: relative;
   font-size: 3.5rem;
   font-weight: bolder;
-  animation: sparkle 0.2s;
+  animation: sparkle 0.3s;
 }
 
 @keyframes sparkle {
