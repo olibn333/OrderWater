@@ -6,9 +6,10 @@ class UserBox extends Component {
     super(props);
   }
 
-  openPrizes = (coins) => {
-    if(window.confirm("You have " + coins + " Coins to Spend! Do you want to spend them?")) {alert("Tough. Spending hasnt been developed yet")}
-  }
+  
+openPrizes = (coins) => {
+  if(window.confirm("You have " + coins + " Coins to Spend! Do you want to spend them?")) {alert("Tough. Spending hasnt been developed yet")}
+}
 
   render() {
     const coins = Math.floor(this.props.bottlesCount / 3)
@@ -28,18 +29,18 @@ class UserBox extends Component {
   }
 }
 
-const CoinPics = (props) => {
-  let clickCoins = () => {
-    props.onClick(props.count)
+const CoinPics = ({onClick, count}) => {
+  const clickCoins = () => {
+    onClick(count)
   }
   let renderCoins = []
-  for (let i = 0; i < props.count; i++) {
-    renderCoins.push(<CoinPic />)
+  for (let i = 0; i < count; i++) {
+    renderCoins.push(<CoinPic key={i}/>)
   }
   return (
     <div 
       className="coinsContainer" 
-      onClick={clickCoins}>
+      onClick={()=>onClick(count)}>
         {renderCoins}
     </div>)
 }
@@ -48,12 +49,14 @@ const CoinPics = (props) => {
 const CoinPic = () => (
   <svg className="coin" viewBox="-3 -3 100 125">
     <g transform="translate(-63.3 -49)">
-      <ellipse cx="115" cy="108" rx="43.3" ry="58.5" fill="#540" stroke="black" stroke-width="3" />
-      <ellipse cx="107" cy="108" rx="43.3" ry="58.5" fill="#fc0" stroke="black" stroke-width="5" />
+      <ellipse cx="115" cy="108" rx="43.3" ry="58.5" fill="#540" stroke="black" strokeWidth="3" />
+      <ellipse cx="107" cy="108" rx="43.3" ry="58.5" fill="#fc0" stroke="black" strokeWidth="5" />
       <text x="95" y="130" fill="black">1</text>
     </g>
   </svg>
 
 )
+
+
 
 export default UserBox

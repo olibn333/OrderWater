@@ -4,7 +4,7 @@ import Header from './Header';
 import * as Fingerprint2 from 'fingerprintjs2';
 import Loader from './Loader'
 
-var serverAddress = "https://orderwater-api.herokuapp.com"
+const serverAddress = (process.env.NODE_ENV === "production") ? "https://orderwater-api.herokuapp.com" : ''
 
 class BizApp extends Component {
 
@@ -52,7 +52,7 @@ class BizApp extends Component {
   }
 
   dbCommitOrders = (query) => {
-    fetch(serverAddress + `/api/commit?q=${query}`, {
+    fetch(serverAddress + "/api/commit?q=" + query, {
       accept: "application/json"
     });
   }

@@ -4,7 +4,7 @@ import Header from './Header'
 import Loader from './Loader'
 import Userbox from './UserBox'
 
-var serverAddress = "https://orderwater-api.herokuapp.com"
+const serverAddress = (process.env.NODE_ENV === "production") ? "https://orderwater-api.herokuapp.com" : ''
 
 class ConsApp extends Component {
 
@@ -30,15 +30,10 @@ class ConsApp extends Component {
 
   componentDidMount = () => {
     this.hydrateStateWithLocalStorage();
-
-    // add event listener to save state to localStorage
-    // when user leaves/refreshes the page
-
     window.addEventListener(
       "beforeunload",
       this.saveStateToLocalStorage()
     );
-
   }
 
   componentDidUpdate = () => {
@@ -46,15 +41,18 @@ class ConsApp extends Component {
   }
 
   componentWillUnmount = () => {
-
     window.removeEventListener(
       "beforeunload",
       this.saveStateToLocalStorage()
     );
-
-
     // saves if component has a chance to unmount
     this.saveStateToLocalStorage();
+  }
+
+  saveStateToLocalStorage = () => {
+    for (let key in this.state) {
+      localStorage.setItem(key, JSON.stringify(this.state[key]));
+    }
   }
 
   hydrateStateWithLocalStorage = () => {
@@ -116,13 +114,6 @@ class ConsApp extends Component {
       userOrdersCount: this.state.userOrdersCount + i,
     });
   }
-
-  saveStateToLocalStorage = () => {
-    for (let key in this.state) {
-      localStorage.setItem(key, JSON.stringify(this.state[key]));
-    }
-  }
-
 
   //Render
 
