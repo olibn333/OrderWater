@@ -27,7 +27,6 @@ class ConsApp extends Component {
   }
 
   //Persistence
-
   componentDidMount = () => {
     this.hydrateStateWithLocalStorage();
     window.addEventListener(
@@ -124,7 +123,7 @@ class ConsApp extends Component {
       <div className="App">
         <Header isHome={false} />
         <Userbox
-          user={this.state.userName}
+          userName={this.state.userName}
           ordersCount={this.state.userOrdersCount}
           bottlesCount={this.state.userBottlesCount}/>
 
