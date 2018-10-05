@@ -55,13 +55,14 @@ const CoinPics = ({ onClick, count }) => {
     return coins;
   }
 
-  const coinsArray = amountToCoins(count, [10, 5, 1])
+  const coinsArray = amountToCoins(count, [5000, 1000, 500, 100, 50, 10, 5, 1])
 
   return (
     <div
       className="coinsContainer"
       onClick={() => onClick(count)}>
-      {coinsArray.map((coinType, i) => <CoinPic key={coinType+i} value={coinType} />)}
+      {coinsArray.map((coinType, i) => 
+      <CoinPic key={coinType+i} value={coinType>999 ? (Math.floor(coinType/1000)+'k') : coinType} />)}
     </div>)
 }
 
@@ -71,7 +72,7 @@ const CoinPic = ({ value }) => (
     <g transform="translate(-63.3 -49)">
       <ellipse cx="115" cy="108" rx="43.3" ry="58.5" fill="#540" stroke="black" strokeWidth="3" />
       <ellipse cx="107" cy="108" rx="43.3" ry="58.5" fill="#fc0" stroke="black" strokeWidth="5" />
-      <text text-anchor="middle" x="105" y="130" fill="black">{value}</text>
+      <text text-anchor="middle" x="105" y="125" fill="black">{value}</text>
     </g>
   </svg>
 

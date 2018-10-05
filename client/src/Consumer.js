@@ -163,7 +163,8 @@ class UserForm extends Component {
   reset = () => { this.setState({ isLoading: false }) }
 
   fiveLOrderOnChange = (event) => {
-    this.setState({ fiveL: event.target.value })
+    const num = Number(event.target.value)
+    this.setState({ fiveL: num })
   }
 
   increaseClick = () => {
