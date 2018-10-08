@@ -26,7 +26,7 @@ Todo:
 - user management, points usage, rewards
 - santitise sql
 - server sent events for auto update
-- make the cat wink
+- ~make the cat blink~
 - o so much more
 
 

@@ -3,7 +3,6 @@
   text-align: center;
 }
 
-
 html {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -22,12 +21,43 @@ html {
   color: white;
 }
 
-.App-logo {
-  /*animation: App-logo-spin infinite 20s linear;*/
+/* Logo */
+
+#logo {
   height: 10rem;
-  display: block;
-  /* border: 1px solid green; */
-  margin: auto;
+}
+
+.blink > #righteye > *, .blink > #lefteye > * {
+  animation: blink 0.1s linear;
+}
+
+@keyframes blink {
+  100% {
+    ry: 0%;
+  }
+}
+
+.App-header:hover .iris {
+  animation: squint 2s ease-in;
+  animation-fill-mode: forwards;
+} 
+
+@keyframes squint {
+  20% {
+    ry: 40;
+  }
+  100% {
+    ry:40;
+  }
+}
+
+.App-header:hover .pupil {
+  animation: shifteye 2s ease-in;
+  animation-fill-mode: forwards;
+} 
+
+@keyframes shifteye {
+  100% {transform: translate(-100px, 0)}
 }
 
 .App-title {
@@ -70,6 +100,13 @@ html {
   color: green;
 }
 
+.boxContainer:hover {
+  background: green;
+  cursor: pointer;
+  color: gold;
+  font-weight: bolder;
+}
+
 .coinsContainer {
   position: relative;
 }
@@ -97,14 +134,13 @@ html {
   }
 }
 
-
 .spend {
-  padding: 0.5rem !important;
+  display: inline-block !important;
   color: gold !important;
+  margin: 0 !important;
 }
 
-
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:700px) {
   .points {
     font-size: 0.5rem;
     width: 5rem;
@@ -114,7 +150,6 @@ html {
   .boxHeader {
     font-size: 0.6rem;
     overflow: hidden !important;
-
   }
   .shrinkable {
     width: 10rem;
@@ -151,7 +186,7 @@ html {
   background-color: #4CAF50;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 0.3rem #999;
 }
 
 .logout {

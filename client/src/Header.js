@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import logo from './icons/logo.svg';
+import Logo from './Logo';
 import './App.css';
 
 class Header extends Component {
@@ -30,7 +30,7 @@ class Header extends Component {
       <div>
         <header className="App-header">
         {logout}
-          <img src={logo} className="App-logo" alt="logo" />
+          <Logo />
           <h1 className="App-title">Welcome to YayCat!</h1>
         </header>
         {home}
