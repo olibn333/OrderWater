@@ -1,6 +1,38 @@
 import React, { Component } from 'react';
 import './App.css';
 
+class NavMenu extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isOpen: false
+    }
+  }
+
+  toggleOpen = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+
+  render() {
+    return (
+      <span>
+      <Burger
+          onClick={this.toggleOpen}
+          isOpen={this.state.isOpen} />
+      <nav className={(this.state.isOpen) ? "navMenu open" : "navMenu closed"}>
+        {/* <UserBox
+          userName={this.props.userName}
+          ordersCount={this.props.ordersCount}
+          bottlesCount={this.props.bottlesCount}
+        /> */}
+      </nav>
+      </span>  
+    )
+  }
+}
+
 const UserBox = ({ bottlesCount, userName, ordersCount }) => {
 
   const coinCount = Math.floor(bottlesCount / 3)
@@ -11,7 +43,7 @@ const UserBox = ({ bottlesCount, userName, ordersCount }) => {
 
   const reset = () => {
     window.localStorage.clear()
-    if (window.confirm("Do you want to clear your user settings?")) {window.localStorage.clear()}
+    if (window.confirm("Do you want to clear your user settings?")) { window.localStorage.clear() }
   }
 
   return (
@@ -19,7 +51,8 @@ const UserBox = ({ bottlesCount, userName, ordersCount }) => {
       <UserDataList
         {...{ bottlesCount, ordersCount, coinCount }}
         header={userName}
-        onClick={reset} />
+        onClick={reset} 
+        />
       <CoinPics
         count={coinCount}
         onClick={openPrizes} />
@@ -37,7 +70,7 @@ const SpendButton = ({ openSpender }) => {
 
 const UserDataList = ({ header, ordersCount, bottlesCount, coinCount, onClick }) => {
   return (
-    <div className="boxContainer" onClick={onClick}>
+    <div className="boxContainer" /* onClick={onClick} */>
       <div className="boxHeader">{header}</div>
       <div className="boxBody">
         <p>Orders Made: {ordersCount}</p>
@@ -52,7 +85,7 @@ const CoinPics = ({ onClick, count }) => {
 
   function amountToCoins(num, arr, maxCap, infinSymbol) {
     let displayCoins = [];
-    const isCapped = (num>maxCap)
+    const isCapped = (num > maxCap)
     let coinsToCount = (isCapped) ? maxCap : num
     for (var i = 0; i < arr.length; i++) {
       while (coinsToCount >= arr[i]) {
@@ -60,7 +93,7 @@ const CoinPics = ({ onClick, count }) => {
         coinsToCount -= arr[i];
       }
     }
-    if (isCapped) {displayCoins.push(infinSymbol)}
+    if (isCapped) { displayCoins.push(infinSymbol) }
     return displayCoins;
   }
 
@@ -91,6 +124,15 @@ const CoinPic = ({ value }) => (
 
 )
 
+const Burger = ({ onClick, isOpen }) => (
+  <svg className="burger"/* {(isOpen) ? "burger open" : "burger closed"} */ onClick={onClick} viewBox="0 0 32 32">
+    <rect id="topBurger" x="5" y="7" width="20" height="4" />
+    <rect id="midBurger" x="5" y="14" width="20" height="4" />
+    <rect id="bottomBurger" x="5" y="21" width="20" height="4" />
+
+  </svg>
+)
 
 
-export default UserBox
+
+export default NavMenu

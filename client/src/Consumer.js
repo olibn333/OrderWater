@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header'
 import Loader from './Loader'
-import Userbox from './UserBox'
+import NavMenu from './UserBox';
 
 const serverAddress = (process.env.NODE_ENV === "production") ? "https://orderwater-api.herokuapp.com" : ''
 
@@ -122,7 +122,7 @@ class ConsApp extends Component {
     return (
       <div className="App">
         <Header isHome={false} />
-        <Userbox
+        <NavMenu
           userName={this.state.userName}
           ordersCount={this.state.userOrdersCount}
           bottlesCount={this.state.userBottlesCount}/>

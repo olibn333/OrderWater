@@ -78,7 +78,79 @@ html {
 
 /*Points Box*/
 
+.navMenu {
+  position: absolute;
+  height: 100%;
+  width: 0rem;
+  top: 0;
+  right: 0;
+  background-color: green;
+  z-index: 900;
+}
+
+.navMenu.closed  {
+  animation: slide-out 0.1s ease-in;
+  animation-fill-mode: forwards;
+}
+
+.navMenu.open {
+  animation: slide-in 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-in {
+  100% {
+    width: 10rem;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    width: 10rem;
+  }
+  100% {
+    width: 0rem;
+  }
+}
+
+.burger {
+  position: absolute;
+  right:1rem;
+  top:1rem;
+  cursor: pointer;
+  fill: gold;
+  z-index: 901;
+  transition: width 2s;
+}
+
+.burger::before {
+  width: 5rem;
+}
+.burger.open > rect {
+  /* animation: slither 0.3s ease-in; */
+  animation-fill-mode: forwards;
+  transform-origin: 50% 50%;
+}
+
+.burger.closed > rect {
+  animation: slither 0.3s ease-in;
+  animation-fill-mode: forwards;
+  transform-origin: 50% 50%;
+}
+
+@keyframes slitherIn {
+  100% {
+    transform: rotate(90deg) scale(1);
+  }
+}
+@keyframes slitherOut {
+  100% {
+    transform: rotate(90deg) scale(1);
+  }
+}
+
 .points {
+  /* visibility: hidden; */
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -98,13 +170,6 @@ html {
   font-weight: 1000;
   font-size: 1rem;
   color: green;
-}
-
-.boxContainer:hover {
-  background: green;
-  cursor: pointer;
-  color: gold;
-  font-weight: bolder;
 }
 
 .coinsContainer {
@@ -162,6 +227,9 @@ html {
   .App-header {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  .App-title {
+    font-size: 1.5rem; 
   }
 }
 
