@@ -22,7 +22,7 @@ class NavMenu extends Component {
           onClick={this.toggleOpen}
           isOpen={this.state.isOpen} />
         <nav className={(this.state.isOpen) ? "navMenu open" : "navMenu closed"}>
-          < NavBox 
+          <NavBox
             userName={this.props.userName}
             ordersCount={this.props.userOrdersCount}
             bottlesCount={this.props.userBottlesCount}
@@ -91,7 +91,7 @@ const UserBox = ({ userName, ordersCount, bottlesCount, coinCount, onClick }) =>
   )
 }
 
-const CoinPics = ({ onClick, count }) => {
+const CoinPics = ({ count }) => {
 
   function amountToCoins(num, arr, maxCap, infinSymbol) {
     let displayCoins = [];
@@ -110,9 +110,7 @@ const CoinPics = ({ onClick, count }) => {
   const coinsArray = amountToCoins(count, [5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1], 25000, '...')
 
   return (
-    <div
-      className="coinsContainer"
-      onClick={() => onClick(count)}>
+    <div className="coinsContainer">
       {coinsArray.map((coinType, i) =>
         <CoinPic
           key={String(coinType) + String(i)}
@@ -135,7 +133,7 @@ const CoinPic = ({ value }) => (
 )
 
 const Burger = ({ onClick, isOpen }) => (
-  <svg className="burger"/* {(isOpen) ? "burger open" : "burger closed"} */ onClick={onClick} viewBox="0 0 32 32">
+  <svg className={(isOpen) ? "burger open" : "burger closed"} onClick={onClick} viewBox="0 0 32 32">
     <rect id="topBurger" x="5" y="7" width="20" height="4" />
     <rect id="midBurger" x="5" y="14" width="20" height="4" />
     <rect id="bottomBurger" x="5" y="21" width="20" height="4" />

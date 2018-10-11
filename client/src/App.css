@@ -27,7 +27,7 @@ html {
   height: 10rem;
 }
 
-.blink > #righteye > *, .blink > #lefteye > * {
+.blink>#righteye>*, .blink>#lefteye>* {
   animation: blink 0.1s linear;
 }
 
@@ -40,24 +40,26 @@ html {
 .App-header:hover .iris {
   animation: squint 2s ease-in;
   animation-fill-mode: forwards;
-} 
+}
 
 @keyframes squint {
   20% {
     ry: 40;
   }
   100% {
-    ry:40;
+    ry: 40;
   }
 }
 
 .App-header:hover .pupil {
   animation: shifteye 2s ease-in;
   animation-fill-mode: forwards;
-} 
+}
 
 @keyframes shifteye {
-  100% {transform: translate(-100px, 0)}
+  100% {
+    transform: translate(-100px, 0)
+  }
 }
 
 .App-title {
@@ -86,12 +88,16 @@ html {
   right: 0;
   background-color: grey;
   z-index: 900;
-  visibility: hidden;
+  position: fixed;
 }
 
-.navMenu.closed  {
+.navMenu.closed {
   animation: slide-out 0.1s ease-in;
   animation-fill-mode: forwards;
+}
+
+.navMenu.closed > * {
+  visibility: hidden
 }
 
 .navMenu.open {
@@ -112,14 +118,14 @@ html {
   }
   100% {
     width: 0rem;
-    visibility: hidden;
+    opacity: 0%;
   }
 }
 
 .burger {
   position: absolute;
-  right:1rem;
-  top:1rem;
+  right: 1rem;
+  top: 1rem;
   cursor: pointer;
   fill: gold;
   z-index: 901;
@@ -129,13 +135,14 @@ html {
 .burger::before {
   width: 5rem;
 }
-.burger.open > rect {
+
+.burger.open>rect {
   /* animation: slither 0.3s ease-in; */
   animation-fill-mode: forwards;
   transform-origin: 50% 50%;
 }
 
-.burger.closed > rect {
+.burger.closed>rect {
   animation: slither 0.3s ease-in;
   animation-fill-mode: forwards;
   transform-origin: 50% 50%;
@@ -146,6 +153,7 @@ html {
     transform: rotate(90deg) scale(1);
   }
 }
+
 @keyframes slitherOut {
   100% {
     transform: rotate(90deg) scale(1);
@@ -155,6 +163,7 @@ html {
 .nav-header {
   height: 2rem;
 }
+
 .points {
   font-size: 0.5rem;
   color: white;
@@ -207,7 +216,6 @@ html {
   color: gold !important;
   margin: 0 !important;
 }
-
 
 /* Elements Stuff */
 
@@ -335,7 +343,6 @@ circle {
   transform-origin: 50% 50%;
 }
 
-
 @media only screen and (max-width:700px) {
   /* .points {
     font-size: 0.5rem;
@@ -360,6 +367,6 @@ circle {
     padding-right: 1rem;
   }
   .App-title {
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
   }
 }
