@@ -18,22 +18,22 @@ class NavMenu extends Component {
   render() {
     return (
       <span>
-      <Burger
+        <Burger
           onClick={this.toggleOpen}
           isOpen={this.state.isOpen} />
-      <nav className={(this.state.isOpen) ? "navMenu open" : "navMenu closed"}>
-        {/* <UserBox
-          userName={this.props.userName}
-          ordersCount={this.props.ordersCount}
-          bottlesCount={this.props.bottlesCount}
-        /> */}
-      </nav>
-      </span>  
+        <nav className={(this.state.isOpen) ? "navMenu open" : "navMenu closed"}>
+          < NavBox 
+            userName={this.props.userName}
+            ordersCount={this.props.userOrdersCount}
+            bottlesCount={this.props.userBottlesCount}
+          />
+        </nav>
+      </span>
     )
   }
 }
 
-const UserBox = ({ bottlesCount, userName, ordersCount }) => {
+const NavBox = ({ bottlesCount, userName, ordersCount }) => {
 
   const coinCount = Math.floor(bottlesCount / 3)
 
@@ -48,34 +48,44 @@ const UserBox = ({ bottlesCount, userName, ordersCount }) => {
 
   return (
     <div className="points">
-      <UserDataList
+      <UserBox
         {...{ bottlesCount, ordersCount, coinCount }}
-        header={userName}
-        onClick={reset} 
-        />
-      <CoinPics
-        count={coinCount}
-        onClick={openPrizes} />
-      <SpendButton
-        openSpender={() => openPrizes(coinCount)} />
+        userName={userName}
+        onClick={reset}
+      />
+      <CoinBox
+        coinCount={coinCount}
+      />
     </div>
   )
 }
 
+const CoinBox = ({ coinCount, spend }) => {
+  return (
+    <div className="coinBox" >
+      <p>Gold Coins: {coinCount}</p>
+      <CoinPics
+        count={coinCount} />
+      <SpendButton
+        openSpender={spend}
+      />
+    </div>
+  )
+}
 const SpendButton = ({ openSpender }) => {
   return (
     <button className="spend button" onClick={openSpender}>Spend Coins?</button>
   )
 }
 
-const UserDataList = ({ header, ordersCount, bottlesCount, coinCount, onClick }) => {
+const UserBox = ({ userName, ordersCount, bottlesCount, coinCount, onClick }) => {
   return (
-    <div className="boxContainer" /* onClick={onClick} */>
-      <div className="boxHeader">{header}</div>
+    <div className="boxContainer" onClick={onClick} >
+      <div className="boxHeader">User Details:</div>
       <div className="boxBody">
+        <p>Name: {userName}</p>
         <p>Orders Made: {ordersCount}</p>
         <p>Bottles Ordered: {bottlesCount}</p>
-        <p>Gold Coins: {coinCount}</p>
       </div>
     </div>
   )

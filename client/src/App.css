@@ -84,8 +84,9 @@ html {
   width: 0rem;
   top: 0;
   right: 0;
-  background-color: green;
+  background-color: grey;
   z-index: 900;
+  visibility: hidden;
 }
 
 .navMenu.closed  {
@@ -101,6 +102,7 @@ html {
 @keyframes slide-in {
   100% {
     width: 10rem;
+    visibility: visible;
   }
 }
 
@@ -110,6 +112,7 @@ html {
   }
   100% {
     width: 0rem;
+    visibility: hidden;
   }
 }
 
@@ -149,26 +152,26 @@ html {
   }
 }
 
+.nav-header {
+  height: 2rem;
+}
 .points {
-  /* visibility: hidden; */
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  width: 10rem;
-  /* height: 13rem; */
-  font-size: 0.8rem;
+  font-size: 0.5rem;
   color: white;
   border: 1px solid green;
-  padding: 0.5rem;
+  margin: 0.5rem 0.5rem;
+  margin-top: 6rem;
 }
 
 .points p {
   text-align: left;
+  margin: 0 0 0.1rem 0.1rem;
 }
 
 .boxHeader {
   font-weight: 1000;
-  font-size: 1rem;
+  text-align: left;
+  font-size: 1.2rem;
   color: green;
 }
 
@@ -205,33 +208,6 @@ html {
   margin: 0 !important;
 }
 
-@media only screen and (max-width:700px) {
-  .points {
-    font-size: 0.5rem;
-    width: 5rem;
-    right: 0.2rem;
-    padding: 0.1rem;
-  }
-  .boxHeader {
-    font-size: 0.6rem;
-    overflow: hidden !important;
-  }
-  .shrinkable {
-    width: 10rem;
-  }
-  .logout, .spend {
-    padding: 5px 10px !important;
-    margin: 0 !important;
-    font-size: 0.5rem !important;
-  }
-  .App-header {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .App-title {
-    font-size: 1.5rem; 
-  }
-}
 
 /* Elements Stuff */
 
@@ -357,4 +333,33 @@ circle {
   animation-name: pop;
   animation-duration: 3s;
   transform-origin: 50% 50%;
+}
+
+
+@media only screen and (max-width:700px) {
+  /* .points {
+    font-size: 0.5rem;
+    width: 5rem;
+    right: 0.2rem;
+    padding: 0.1rem;
+  }
+  .boxHeader {
+    font-size: 1rem;
+    overflow: hidden !important;
+  } */
+  .shrinkable {
+    width: 10rem;
+  }
+  .logout, .spend {
+    padding: 5px 10px !important;
+    margin: 0 !important;
+    font-size: 0.5rem !important;
+  }
+  .App-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .App-title {
+    font-size: 1.5rem; 
+  }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import Logo from './Logo';
 import './App.css';
+import NavMenu from './NavMenu';
 
 class Header extends Component {
   constructor(props) {
@@ -27,9 +28,8 @@ class Header extends Component {
     }
 
     return (
-      <div>
-        <header className="App-header">
-        {logout}
+      <div className="App-header">
+        <header>
           <Logo />
           <h1 className="App-title">Welcome to YayCat!</h1>
         </header>
