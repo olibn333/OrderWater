@@ -81,7 +81,6 @@ html {
 /*Points Box*/
 
 .navMenu {
-  position: absolute;
   height: 100%;
   width: 0rem;
   top: 0;
@@ -89,11 +88,15 @@ html {
   background-color: grey;
   z-index: 900;
   position: fixed;
+  transition-property: width, opacity;
+  transition-duration: 0.3s;
 }
 
 .navMenu.closed {
-  animation: slide-out 0.1s ease-in;
-  animation-fill-mode: forwards;
+  /* animation: slide-out 0.1s ease-in;
+  animation-fill-mode: forwards; */
+  width: 0rem;
+  opacity: 0;
 }
 
 .navMenu.closed > * {
@@ -101,8 +104,10 @@ html {
 }
 
 .navMenu.open {
-  animation: slide-in 0.3s ease-out;
-  animation-fill-mode: forwards;
+  /* animation: slide-in 0.3s ease-out;
+  animation-fill-mode: forwards; */
+  width: 10rem;
+  opacity: 100;
 }
 
 @keyframes slide-in {
@@ -129,23 +134,19 @@ html {
   cursor: pointer;
   fill: gold;
   z-index: 901;
-  transition: width 2s;
 }
 
-.burger::before {
-  width: 5rem;
-}
-
-.burger.open>rect {
-  /* animation: slither 0.3s ease-in; */
-  animation-fill-mode: forwards;
+rect {
+  transition: transform 2s;
   transform-origin: 50% 50%;
 }
 
-.burger.closed>rect {
-  animation: slither 0.3s ease-in;
-  animation-fill-mode: forwards;
-  transform-origin: 50% 50%;
+.burger.open > rect {
+  transform: rotate(10deg);
+}
+
+.burger.closed > rect {
+  transform: rotate(0deg);
 }
 
 @keyframes slitherIn {
