@@ -16,16 +16,23 @@ class NavMenu extends Component {
   }
 
   render() {
+
+    const coinCount = Math.floor(this.props.userBottlesCount / 3)
     return (
       <span>
         <Burger
           onClick={this.toggleOpen}
           isOpen={this.state.isOpen} />
+        <CoinPic
+          extraClass="counter"
+          value={coinCount}
+          key={coinCount} />
         <nav className={(this.state.isOpen) ? "navMenu open" : "navMenu closed"}>
           <NavBox
             userName={this.props.userName}
             ordersCount={this.props.userOrdersCount}
             bottlesCount={this.props.userBottlesCount}
+            coinCount={coinCount}
           />
         </nav>
       </span>
@@ -33,9 +40,8 @@ class NavMenu extends Component {
   }
 }
 
-const NavBox = ({ bottlesCount, userName, ordersCount }) => {
+const NavBox = ({ bottlesCount, userName, ordersCount, coinCount }) => {
 
-  const coinCount = Math.floor(bottlesCount / 3)
 
   const openPrizes = (coinCount) => {
     if (window.confirm("You have " + coinCount + " Coins to Spend! Do you want to spend them?")) { alert("Tough. Spending hasnt been developed yet") }
@@ -121,8 +127,8 @@ const CoinPics = ({ count }) => {
 }
 
 
-const CoinPic = ({ value }) => (
-  <svg className="coin" viewBox="-3 -3 100 125">
+const CoinPic = ({ value, extraClass }) => (
+  <svg className={`coin ${extraClass} `} viewBox="-3 -3 100 125">
     <g transform="translate(-63.3 -49)">
       <ellipse cx="115" cy="108" rx="43.3" ry="58.5" fill="#540" stroke="black" strokeWidth="3" />
       <ellipse cx="107" cy="108" rx="43.3" ry="58.5" fill="#fc0" stroke="black" strokeWidth="5" />
@@ -133,10 +139,10 @@ const CoinPic = ({ value }) => (
 )
 
 const Burger = ({ onClick, isOpen }) => (
-  <svg className={(isOpen) ? "burger open" : "burger closed"} onClick={onClick} viewBox="0 0 32 32">
-    <rect id="topBurger" x="5" y="7" width="20" height="4" />
-    <rect id="midBurger" x="5" y="14" width="20" height="4" />
-    <rect id="bottomBurger" x="5" y="21" width="20" height="4" />
+  <svg className={(isOpen) ? "burger open" : "burger closed"} onClick={onClick} viewBox="0 0 24 24">
+    <rect id="topBurger" x="2" y="4" width="20" height="4" />
+    <rect id="midBurger" x="2" y="10" width="20" height="4" />
+    <rect id="bottomBurger" x="2" y="16" width="20" height="4" />
 
   </svg>
 )

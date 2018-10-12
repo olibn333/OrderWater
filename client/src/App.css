@@ -85,11 +85,11 @@ html {
   width: 0rem;
   top: 0;
   right: 0;
-  background-color: grey;
-  z-index: 900;
+  background-color: #525252;
+  z-index: 925;
   position: fixed;
   transition-property: width, opacity;
-  transition-duration: 0.3s;
+  transition-duration: 0.5s;
 }
 
 .navMenu.closed {
@@ -133,20 +133,33 @@ html {
   top: 1rem;
   cursor: pointer;
   fill: gold;
-  z-index: 901;
+  z-index: 900;
+  transition: fill 0.5s, transform 0.5s;
+}
+
+.burger:hover {
+  fill: green;
+}
+
+.burger.open {
+  transform: rotate(225deg);
+  z-index: 950;
 }
 
 rect {
-  transition: transform 2s;
-  transform-origin: 50% 50%;
+  transition-property: y, transform;
+  transition-duration: 0.5s;
+  transform-origin: center;
 }
 
-.burger.open > rect {
-  transform: rotate(10deg);
+.burger.open > #topBurger {
+  y: 10;
 }
-
-.burger.closed > rect {
-  transform: rotate(0deg);
+.burger.open > #bottomBurger {
+  y: 10;
+}
+.burger.open > #midBurger {
+  transform:rotate(90deg);
 }
 
 @keyframes slitherIn {
@@ -163,6 +176,13 @@ rect {
 
 .nav-header {
   height: 2rem;
+}
+
+.counter {
+  position: fixed !important;
+  top: 1rem;
+  right: 1rem;
+  z-index: 924;
 }
 
 .points {
