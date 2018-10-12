@@ -146,7 +146,7 @@ html {
   z-index: 950;
 }
 
-rect {
+.burger > rect {
   transition-property: y, transform;
   transition-duration: 0.5s;
   transform-origin: center;
