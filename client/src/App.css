@@ -82,50 +82,21 @@ html {
 
 .navMenu {
   height: 100%;
-  width: 0rem;
+  width: 10rem;
   top: 0;
   right: 0;
   background-color: #525252;
   z-index: 925;
   position: fixed;
-  transition-property: width, opacity;
+  transform: translate(10rem);
+  transition-property: transform, opacity;
   transition-duration: 0.5s;
 }
 
-.navMenu.closed {
-  /* animation: slide-out 0.1s ease-in;
-  animation-fill-mode: forwards; */
-  width: 0rem;
-  opacity: 0;
-}
-
-.navMenu.closed > * {
-  visibility: hidden
-}
-
 .navMenu.open {
-  /* animation: slide-in 0.3s ease-out;
-  animation-fill-mode: forwards; */
-  width: 10rem;
-  opacity: 100;
+  transform: translate(0)
 }
 
-@keyframes slide-in {
-  100% {
-    width: 10rem;
-    visibility: visible;
-  }
-}
-
-@keyframes slide-out {
-  0% {
-    width: 10rem;
-  }
-  100% {
-    width: 0rem;
-    opacity: 0%;
-  }
-}
 
 .burger {
   position: absolute;
@@ -133,7 +104,7 @@ html {
   top: 1rem;
   cursor: pointer;
   fill: gold;
-  z-index: 900;
+  z-index: 950;
   transition: fill 0.5s, transform 0.5s;
 }
 
@@ -143,7 +114,10 @@ html {
 
 .burger.open {
   transform: rotate(225deg);
-  z-index: 950;
+}
+
+.burger.open ~ .counter {
+  opacity: 0;
 }
 
 .burger > rect {
@@ -162,18 +136,6 @@ html {
   transform:rotate(90deg);
 }
 
-@keyframes slitherIn {
-  100% {
-    transform: rotate(90deg) scale(1);
-  }
-}
-
-@keyframes slitherOut {
-  100% {
-    transform: rotate(90deg) scale(1);
-  }
-}
-
 .nav-header {
   height: 2rem;
 }
@@ -182,7 +144,8 @@ html {
   position: fixed !important;
   top: 1rem;
   right: 1rem;
-  z-index: 924;
+  z-index: 951;
+  transition: opacity 0.3s;
 }
 
 .points {

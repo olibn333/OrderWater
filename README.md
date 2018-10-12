@@ -20,6 +20,7 @@ Install npm packages for client and root folders:
  <br /> <br />
 Run!
 - 'npm start' on top level to start client and server together. You should get a browser page pointing at localhost:3000 talking to the server.
+-'cd client' and 'npm run build' to build client only
 
 Todo:
 - ~merge clients 1&2 into 1 app~
