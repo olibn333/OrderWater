@@ -26,11 +26,11 @@ class Logo extends Component {
     const isBlinking = (Math.random() > 0.5)
     const blinkStyle = isBlinking ? 'blink' : ''
     return (
-      <svg id="logo" viewBox="0 0 627 627">
+      <svg id="logo" viewBox="0 0 627 627" className={this.props.logoStyle}>
         <g transform="translate(-208 -229)">
           <g fill="#fc0">
-            <path className="ear" transform="matrix(.972 -.236 .277 1.14 -135 95.3)" d="m581 477h-304l152-263z" stroke-width=".937" />
-            <path className="ear" transform="matrix(-.972 -.236 -.277 1.14 1178 95.3)" d="m581 477h-304l152-263z" stroke-width=".937" />
+            <path className="ear" transform="matrix(.972 -.236 .277 1.14 -135 95.3)" d="m581 477h-304l152-263z" strokeWidth=".937" />
+            <path className="ear" transform="matrix(-.972 -.236 -.277 1.14 1178 95.3)" d="m581 477h-304l152-263z" strokeWidth=".937" />
             <ellipse cx="522" cy="609" rx="260" ry="239" />
           </g>
           <g className={blinkStyle}>
@@ -43,7 +43,7 @@ class Logo extends Component {
               <ellipse className="pupil" cx="685" cy="539" rx="27" ry="24.8" fill="#fff" />
             </g>
           </g>
-          <path d="m421 698c183 34.8 199-46.4 199-46.4" fill="none" stroke="#000" stroke-width="4.25px" />
+          <path d="m421 698c183 34.8 199-46.4 199-46.4" fill="none" stroke="#000" strokeWidth="4.25px" />
         </g>
       </svg>
     )

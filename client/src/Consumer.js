@@ -11,11 +11,14 @@ class ConsApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        userPhoneNumber: "",
-        userName: "",
-        userAddress: "",
-        userOrdersCount: 0,
-        userBottlesCount: 0,
+      userPhoneNumber: "",
+      userName: "",
+      userAddress: "",
+      userOrdersCount: 0,
+      userBottlesCount: 0,
+      userCoinCount: 0,
+      logoStyle: "",
+
     };
   }
 
@@ -33,6 +36,7 @@ class ConsApp extends Component {
       "beforeunload",
       this.saveStateToLocalStorage()
     );
+    
   }
 
   componentDidUpdate = () => {
@@ -91,6 +95,7 @@ class ConsApp extends Component {
     this.addBottlesCount(order);
     this.addOrderCount(1);
     this.placeOrderDB(this.state.userName + ',' + this.state.userPhoneNumber + ',' + order);
+    this.calcCoins();
   }
 
   //Points Handling
@@ -98,20 +103,37 @@ class ConsApp extends Component {
   addBottlesCount = (i) => {
     const newBottlesCount = this.state.userBottlesCount + i
     this.setState({
-      userBottlesCount : newBottlesCount
+      userBottlesCount: newBottlesCount
     });
   }
 
+  calcCoins = () => {
+    this.setState((prevstate) => ({
+      userCoinCount: Math.floor(prevstate.userBottlesCount / 3)
+    }))}
+
   addCoins = (i) => {
     this.setState({
-      goldCoins: this.state.goldCoins + i,
+      userCoinCount: this.state.userCoinCount + i,
     });
+    console.log(i + ' coins Added')
   }
 
   addOrderCount = (i) => {
     this.setState({
       userOrdersCount: this.state.userOrdersCount + i,
     });
+  }
+
+  spendCoins = (coinCount, i) => {
+    if (coinCount > 0) {
+      console.log('spent '+i+' coins')
+      this.setState({ 
+        userCoinCount: (this.state.userCoinCount - i) 
+      })
+    } else {
+      console.log('no coins')
+    }
   }
 
   //Render
@@ -121,11 +143,16 @@ class ConsApp extends Component {
 
     return (
       <div className="App">
-        <Header isHome={false} />
-        <NavMenu 
+        <Header
+          isHome={false}
+          logoStyle={this.state.logoStyle} />
+        <NavMenu
           userBottlesCount={this.state.userBottlesCount}
           userName={this.state.userName}
-          userOrdersCount={this.state.userOrdersCount}/>
+          userOrdersCount={this.state.userOrdersCount}
+          spendCoins={this.spendCoins}
+          coinCount={this.state.userCoinCount}
+        />
         <div className="Inputs">
           <UserForm
             updateUser={this.updateUser}

@@ -17,7 +17,6 @@ class NavMenu extends Component {
 
   render() {
 
-    const coinCount = Math.floor(this.props.userBottlesCount / 3)
     return (
       <span>
         <Burger
@@ -25,14 +24,15 @@ class NavMenu extends Component {
           isOpen={this.state.isOpen} />
         <CoinPic
           extraClass="counter"
-          value={coinCount}
-          key={coinCount} />
+          value={this.props.coinCount}
+          key={this.props.coinCount} />
         <nav className={(this.state.isOpen) ? "navMenu open" : "navMenu closed"}>
           <NavBox
             userName={this.props.userName}
             ordersCount={this.props.userOrdersCount}
             bottlesCount={this.props.userBottlesCount}
-            coinCount={coinCount}
+            coinCount={this.props.coinCount}
+            spendCoins={this.props.spendCoins}
           />
         </nav>
       </span>
@@ -40,7 +40,7 @@ class NavMenu extends Component {
   }
 }
 
-const NavBox = ({ bottlesCount, userName, ordersCount, coinCount }) => {
+const NavBox = ({ bottlesCount, userName, ordersCount, coinCount, spendCoins }) => {
 
 
   const openPrizes = (coinCount) => {
@@ -61,30 +61,36 @@ const NavBox = ({ bottlesCount, userName, ordersCount, coinCount }) => {
       />
       <CoinBox
         coinCount={coinCount}
-      />
+        spendCoins={spendCoins} />
     </div>
   )
 }
 
-const CoinBox = ({ coinCount, spend }) => {
+const CoinBox = ({ coinCount, spendCoins }) => {
   return (
     <div className="coinBox" >
       <p>Gold Coins: {coinCount}</p>
       <CoinPics
         count={coinCount} />
       <SpendButton
-        openSpender={spend}
+        spendCoins={spendCoins}
+        coinCount={coinCount}
       />
     </div>
   )
 }
-const SpendButton = ({ openSpender }) => {
+const SpendButton = ({ spendCoins, coinCount }) => {
   return (
-    <button className="spend button" onClick={openSpender}>Spend Coins?</button>
+    <button className="spend button" 
+    onClick={() => {
+      console.log('spending from ' + coinCount);
+      spendCoins(coinCount, 1)}}>
+      Spend Coins?
+      </button>
   )
 }
 
-const UserBox = ({ userName, ordersCount, bottlesCount, coinCount, onClick }) => {
+const UserBox = ({ userName, ordersCount, bottlesCount, onClick }) => {
   return (
     <div className="boxContainer" onClick={onClick} >
       <div className="boxHeader">User Details:</div>
@@ -121,6 +127,7 @@ const CoinPics = ({ count }) => {
         <CoinPic
           key={String(coinType) + String(i)}
           value={coinType > 999 ? (Math.floor(coinType / 1000) + 'k') : coinType}
+          extraClass='wallet'
         />
       )}
     </div>)
