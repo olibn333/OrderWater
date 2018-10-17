@@ -10,12 +10,17 @@
   --color4: black;
 }
 
-
-
 html {
   overflow-y: scroll;
   overflow-x: hidden;
   touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .App {
@@ -57,7 +62,6 @@ html {
   --closed: 20px;
 }
 
-
 #logo.crazy #righteye {
   animation: crazy 1s;
   transform-origin: 418px 539px;
@@ -66,24 +70,45 @@ html {
 #logo.crazy #lefteye {
   animation: crazy 1s;
   transform-origin: 626px 539px;
-
 }
 
 @keyframes crazy {
-  100% {transform: rotate(1080deg)}
+  100% {
+    transform: rotate(1080deg)
   }
+}
 
 @keyframes munch {
-  10% {stroke-width: var(--open)}
-  20% {stroke-width: var(--closed)}
-  30% {stroke-width: var(--open)}
-  40% {stroke-width: var(--closed)}
-  50% {stroke-width: var(--open)}
-  60% {stroke-width: var(--closed)}
-  70% {stroke-width: var(--open)}
-  80% {stroke-width: var(--closed)}
-  90% {stroke-width: var(--open)}
-  100% {stroke-width: var(--closed)}
+  10% {
+    stroke-width: var(--open)
+  }
+  20% {
+    stroke-width: var(--closed)
+  }
+  30% {
+    stroke-width: var(--open)
+  }
+  40% {
+    stroke-width: var(--closed)
+  }
+  50% {
+    stroke-width: var(--open)
+  }
+  60% {
+    stroke-width: var(--closed)
+  }
+  70% {
+    stroke-width: var(--open)
+  }
+  80% {
+    stroke-width: var(--closed)
+  }
+  90% {
+    stroke-width: var(--open)
+  }
+  100% {
+    stroke-width: var(--closed)
+  }
 }
 
 .App-title {
@@ -121,7 +146,6 @@ html {
   transform: translate(0)
 }
 
-
 .burger {
   position: absolute;
   right: 1rem;
@@ -141,28 +165,30 @@ html {
   transform: rotate(225deg);
 }
 
-.burger.open ~ .counter {
+.burger.open~.counter {
   opacity: 0;
 }
 
-.burger.closed ~ .counter {
-z-index: 951;
+.burger.closed~.counter {
+  z-index: 951;
 }
 
-.burger > rect {
+.burger>rect {
   transition-property: y, transform;
   transition-duration: 0.5s;
   transform-origin: center;
 }
 
-.burger.open > #topBurger {
+.burger.open>#topBurger {
   y: 10;
 }
-.burger.open > #bottomBurger {
+
+.burger.open>#bottomBurger {
   y: 10;
 }
-.burger.open > #midBurger {
-  transform:rotate(90deg);
+
+.burger.open>#midBurger {
+  transform: rotate(90deg);
 }
 
 .nav-header {
@@ -379,6 +405,7 @@ circle {
     font-size: 1.5rem;
   }
 }
+
 @media only screen and (max-width:500px) {
   .shrinkable {
     width: 10rem;
@@ -388,14 +415,12 @@ circle {
     margin: 0.2rem !important;
     font-size: 0.5rem !important;
   }
-
   .boxHeader {
     font-size: 0.8rem;
   }
   .navMenu {
     width: 6rem;
   }
-
   .App-header {
     padding-left: 1rem;
     padding-right: 1rem;

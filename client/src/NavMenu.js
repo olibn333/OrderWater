@@ -15,12 +15,17 @@ class NavMenu extends Component {
     })
   }
 
+  burgerClick = (e) => {
+    e.preventDefault();
+    this.toggleOpen();
+  }
+
   render() {
 
     return (
       <span>
         <Burger
-          onClick={this.toggleOpen}
+          onClick={this.burgerClick}
           isOpen={this.state.isOpen} />
         <CoinPic
           extraClass="counter"
@@ -87,7 +92,8 @@ const SpendButton = ({spendCoins, coinsToSpend}) => {
   const coinInt = Number(coinsToSpend)
   return (
     <button className="spend button" 
-    onClick={() => {;
+    onClick={(e) => {
+      e.preventDefault();
       spendCoins(coinInt)}}>
       Spend {coinInt} Coins
       </button>
