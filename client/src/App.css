@@ -7,6 +7,7 @@
   --color1: green;
   --color2: gold;
   --color3: rgb(60, 60, 60);
+  --color4: black;
 }
 
 
@@ -24,7 +25,7 @@ html {
 }
 
 .App-header {
-  background-color: #222;
+  background-color: var(--color4);
   height: 13rem;
   padding: 2rem;
   color: white;
@@ -46,29 +47,41 @@ html {
   }
 }
 
-.App-header:hover .iris {
-  animation: squint 2s ease-in;
-  animation-fill-mode: forwards;
+#mouth {
+  transition: width 1s;
 }
 
-@keyframes squint {
-  20% {
-    ry: 40;
-  }
-  100% {
-    ry: 40;
-  }
+#logo.munch #mouth {
+  animation: munch 1s;
+  --open: 50px;
+  --closed: 20px;
+}
+/* 
+.pupil {
+  transition: transform 1s;
+  transform-origin: -10px;
+} */
+
+#logo.crazy .pupil {
+  animation: crazy 1s;
+  transform-origin: center;
 }
 
-.App-header:hover .pupil {
-  animation: shifteye 2s ease-in;
-  animation-fill-mode: forwards;
+@keyframes crazy {
+  100% {transform: rotate(360deg)}
 }
 
-@keyframes shifteye {
-  100% {
-    transform: translate(-100px, 0)
-  }
+@keyframes munch {
+  10% {stroke-width: var(--open)}
+  20% {stroke-width: var(--closed)}
+  30% {stroke-width: var(--open)}
+  40% {stroke-width: var(--closed)}
+  50% {stroke-width: var(--open)}
+  60% {stroke-width: var(--closed)}
+  70% {stroke-width: var(--open)}
+  80% {stroke-width: var(--closed)}
+  90% {stroke-width: var(--open)}
+  100% {stroke-width: var(--closed)}
 }
 
 .App-title {
@@ -164,7 +177,7 @@ z-index: 951;
 .points {
   font-size: 0.5rem;
   color: white;
-  border: 1px solid var(--color1);
+  /* border: 1px solid var(--color1); */
   margin: 0.5rem 0.5rem;
   margin-top: 6rem;
 }
@@ -172,6 +185,12 @@ z-index: 951;
 .points p {
   text-align: left;
   margin: 0 0 0.1rem 0.1rem;
+}
+
+.boxContainer {
+  border: var(--color1) solid 0.1rem;
+  margin: 0.2rem auto;
+  padding-bottom: 0.5rem;
 }
 
 .boxHeader {
@@ -211,7 +230,8 @@ z-index: 951;
 .spend {
   display: inline-block !important;
   color: var(--color2) !important;
-  margin: 0 !important;
+  padding: 0.5rem !important;
+  margin: 0.5rem !important;
 }
 
 /* Elements Stuff */
@@ -356,7 +376,7 @@ circle {
   }
   .logout, .spend {
     padding: 5px 10px !important;
-    margin: 0 !important;
+    margin: 0.2rem !important;
     font-size: 0.5rem !important;
   }
   .App-header {

@@ -68,24 +68,28 @@ const NavBox = ({ bottlesCount, userName, ordersCount, coinCount, spendCoins }) 
 
 const CoinBox = ({ coinCount, spendCoins }) => {
   return (
-    <div className="coinBox" >
-      <p>Gold Coins: {coinCount}</p>
+    <div className="boxContainer coinBox" >
+      <div className="boxHeader">Gold Coins: {coinCount}</div>
       <CoinPics
         count={coinCount} />
       <SpendButton
         spendCoins={spendCoins}
-        coinCount={coinCount}
+        coinsToSpend={1}
+      />
+      <SpendButton
+        spendCoins={spendCoins}
+        coinsToSpend={5}
       />
     </div>
   )
 }
-const SpendButton = ({ spendCoins, coinCount }) => {
+const SpendButton = ({spendCoins, coinsToSpend}) => {
+  const coinInt = Number(coinsToSpend)
   return (
     <button className="spend button" 
-    onClick={() => {
-      console.log('spending from ' + coinCount);
-      spendCoins(coinCount, 1)}}>
-      Spend Coins?
+    onClick={() => {;
+      spendCoins(coinInt)}}>
+      Spend {coinInt} Coins
       </button>
   )
 }

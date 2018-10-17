@@ -32,6 +32,7 @@ class Header extends Component {
         <header>
           <Logo 
           logoStyle={this.props.logoStyle}
+          reset={this.props.reset}
           />
           <h1 className="App-title">Welcome to YayCat!</h1>
         </header>

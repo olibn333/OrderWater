@@ -17,8 +17,8 @@ class ConsApp extends Component {
       userOrdersCount: 0,
       userBottlesCount: 0,
       userCoinCount: 0,
+      userSpentCoinCount: 0,
       logoStyle: "",
-
     };
   }
 
@@ -36,7 +36,7 @@ class ConsApp extends Component {
       "beforeunload",
       this.saveStateToLocalStorage()
     );
-    
+
   }
 
   componentDidUpdate = () => {
@@ -91,11 +91,14 @@ class ConsApp extends Component {
     })
   }
 
-  updateUser = (order) => {
-    this.addBottlesCount(order);
+  updateUser = (bottleOrder) => {
+    const newCoins = Math.floor((this.state.userBottlesCount + bottleOrder) / 3) - this.state.userCoinCount - this.state.userSpentCoinCount
+    console.log(newCoins)
+
+    this.addBottlesCount(bottleOrder);
     this.addOrderCount(1);
-    this.placeOrderDB(this.state.userName + ',' + this.state.userPhoneNumber + ',' + order);
-    this.calcCoins();
+    this.placeOrderDB(this.state.userName + ',' + this.state.userPhoneNumber + ',' + bottleOrder)
+    this.addCoins(newCoins)
   }
 
   //Points Handling
@@ -106,11 +109,6 @@ class ConsApp extends Component {
       userBottlesCount: newBottlesCount
     });
   }
-
-  calcCoins = () => {
-    this.setState((prevstate) => ({
-      userCoinCount: Math.floor(prevstate.userBottlesCount / 3)
-    }))}
 
   addCoins = (i) => {
     this.setState({
@@ -125,15 +123,26 @@ class ConsApp extends Component {
     });
   }
 
-  spendCoins = (coinCount, i) => {
-    if (coinCount > 0) {
-      console.log('spent '+i+' coins')
-      this.setState({ 
-        userCoinCount: (this.state.userCoinCount - i) 
+  spendCoins = (i) => {
+    if (this.state.userCoinCount > 0) {
+      let logoAnim = ''
+      switch (i) {
+        case 1 : logoAnim = "munch"; break
+        case 5 : logoAnim = "crazy"; break
+      }
+      this.setState({
+        userCoinCount: (this.state.userCoinCount - i),
+        userSpentCoinCount: (this.state.userSpentCoinCount + i),
+        logoStyle:logoAnim
       })
+      console.log('spent ' + i + ' coins to make ' + logoAnim)
     } else {
       console.log('no coins')
     }
+  }
+
+  reset = () => {
+    this.setState({logoStyle:''})
   }
 
   //Render
@@ -145,7 +154,8 @@ class ConsApp extends Component {
       <div className="App">
         <Header
           isHome={false}
-          logoStyle={this.state.logoStyle} />
+          logoStyle={this.state.logoStyle}
+          reset={this.reset}/>
         <NavMenu
           userBottlesCount={this.state.userBottlesCount}
           userName={this.state.userName}
