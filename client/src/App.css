@@ -56,20 +56,22 @@ html {
   --open: 50px;
   --closed: 20px;
 }
-/* 
-.pupil {
-  transition: transform 1s;
-  transform-origin: -10px;
-} */
 
-#logo.crazy .pupil {
+
+#logo.crazy #righteye {
   animation: crazy 1s;
-  transform-origin: center;
+  transform-origin: 418px 539px;
+}
+
+#logo.crazy #lefteye {
+  animation: crazy 1s;
+  transform-origin: 626px 539px;
+
 }
 
 @keyframes crazy {
-  100% {transform: rotate(360deg)}
-}
+  100% {transform: rotate(1080deg)}
+  }
 
 @keyframes munch {
   10% {stroke-width: var(--open)}
@@ -361,16 +363,6 @@ circle {
 }
 
 @media only screen and (max-width:700px) {
-  /* .points {
-    font-size: 0.5rem;
-    width: 5rem;
-    right: 0.2rem;
-    padding: 0.1rem;
-  }
-  .boxHeader {
-    font-size: 1rem;
-    overflow: hidden !important;
-  } */
   .shrinkable {
     width: 10rem;
   }
@@ -379,6 +371,31 @@ circle {
     margin: 0.2rem !important;
     font-size: 0.5rem !important;
   }
+  .App-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .App-title {
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (max-width:500px) {
+  .shrinkable {
+    width: 10rem;
+  }
+  .logout, .spend {
+    padding: 5px 10px !important;
+    margin: 0.2rem !important;
+    font-size: 0.5rem !important;
+  }
+
+  .boxHeader {
+    font-size: 0.8rem;
+  }
+  .navMenu {
+    width: 6rem;
+  }
+
   .App-header {
     padding-left: 1rem;
     padding-right: 1rem;

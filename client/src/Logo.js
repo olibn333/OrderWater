@@ -4,8 +4,7 @@ class Logo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      possibleBlinks: 0,
-      isAnimating: false
+      possibleBlinks: 0
     }
   }
 
@@ -24,29 +23,30 @@ class Logo extends Component {
   }
 
   startTimer() {
-    this.interval = setInterval(() => this.tick(), 500);
+    this.interval = setInterval(() => this.tick(), 2000);
+    // console.log('started timer ' + this.interval);
   }
 
   stopTimer() {
     clearInterval(this.interval);
+    // console.log('stopped timer ' + this.interval);
   }
 
-  reset(e) {
-    console.log(e)
+  reset = () => {
+    if (this.props.logoStyle) {
+      this.props.reset();
+      this.startTimer();
+    }
   }
 
   render() {
     if (this.props.logoStyle) { this.stopTimer() } else {
-      if (!this.interval) { this.startTimer() }
       const isBlinking = Math.random() > 0.5
       this.blinkStyle = isBlinking ? 'blink' : ''
     }
-    
-
-    console.log('logo rendered. timer: ' + this.interval)
 
     return (
-      <svg id="logo" viewBox="0 0 627 627" className={this.props.logoStyle} onAnimationEnd={this.props.reset}>
+      <svg id="logo" viewBox="0 0 627 627" className={this.props.logoStyle} onAnimationEnd={this.reset}>
         <g transform="translate(-208 -229)">
           <g fill="#fc0">
             <path className="ear" transform="matrix(.972 -.236 .277 1.14 -135 95.3)" d="m581 477h-304l152-263z" strokeWidth=".937" />
@@ -55,12 +55,12 @@ class Logo extends Component {
           </g>
           <g className={this.blinkStyle} >
             <g id="righteye">
-              <ellipse className="iris" cx="418" cy="539" rx="86.7" ry="79.7" fill="#00f" />
-              <ellipse className="pupil" cx="477" cy="539" rx="27" ry="24.8" fill="#fff" />
+              <ellipse className="iris" cx="418" cy="539" rx="80" ry="80" fill="#00f" />
+              <ellipse className="pupil" cx="470" cy="539" rx="27" ry="24.8" fill="#fff" />
             </g>
             <g id="lefteye">
-              <ellipse className="iris" cx="626" cy="539" rx="86.7" ry="79.7" fill="#00f" />
-              <ellipse className="pupil" cx="685" cy="539" rx="27" ry="24.8" fill="#fff" />
+              <ellipse className="iris" cx="626" cy="539" rx="80" ry="80" fill="#00f" />
+              <ellipse className="pupil" cx="678" cy="539" rx="27" ry="24.8" fill="#fff" />
             </g>
           </g>
           <path id="mouth" d="m421 698c183 34.8 199-46.4 199-46.4" fill="none" stroke="#000" strokeWidth="4.25px" />
